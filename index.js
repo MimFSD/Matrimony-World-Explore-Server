@@ -78,13 +78,13 @@ async function run() {
     const verifyAdmin = async (req, res, next) => {
       const email = req.user.email;
       try {
-        
+
         const query = { email: email };
         const user = await UsersCollection.findOne(query);
         if (!user || user.role !== "admin") {
           return res.status(403).json({ error: "Forbidden Access" });
         }
-        next(); // Proceed to the next middleware or route handler
+        next();      // Proceed to the next middleware or route handler
       } catch (error) {
         console.error("Error verifying admin status:", error);
         res.status(500).json({ error: "Internal Server Error" });
